@@ -125,7 +125,7 @@ describe('data', function(){
     })
   })
 
-  it('seharusnya menghapus satu data berdasarkan id dengan metode DELETE', function(done){
+  it('seharusnya menampilkan data berdasarkan id dengan metode GET', function(done){
     chai.request(server)
     .get('/api/data')
     .end(function(err, res){
