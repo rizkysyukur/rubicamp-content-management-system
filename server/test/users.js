@@ -7,7 +7,7 @@ const should = chai.should();
 
 chai.use(chaiHTTP);
 
-describe('note', function(){
+describe('user', function(){
 
   beforeEach(function(done){
     let user = new User({
