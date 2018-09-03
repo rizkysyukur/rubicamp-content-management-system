@@ -4,12 +4,8 @@ const User = require('../models/user');
 const config = require('../config/config');
 const helpers = require('../helpers/util');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
 
-router.get('register', (req, res) =>{
+router.post('/register', (req, res) =>{
   let user = new User({
     email: req.body.email,
     password: req.body.password,
@@ -31,22 +27,51 @@ router.get('register', (req, res) =>{
   })
 })
 
-router.post('login', (req, res) =>{
-  let token = helpers.token(req.body.email, req.body.password, config.secret, 68400);
-  res.send({
-    data: {
-      email: "saefulrizky2@gmail.com"
-    },
-    token: token
+router.post('/login', (req, res) =>{
+  User.findOne({
+    email: req.body.email,
+  }).then(user => {
+    if(!user){
+      res.json({
+        data:{
+          email: "Invalid email"
+        },
+        token: "Login has failed"
+      })
+    }else{
+      if(req.body.password != user.password){
+        res.json({
+          data:{
+            email: "Password doesnt match"
+          },
+          token: "Login has failed"
+        })
+      }else{
+        let token = helpers.token(user.email, user.password, config.secret, 68400);
+        res.json({
+          data:{
+            email: user.email
+          },
+          token: token
+        })
+      }
+    }
   })
 })
 
-router.post('check', (req, res) =>{
-
+router.post('/check', (req, res) =>{
+  var token = req.body.token || req.query.token || req.header['x-access-token'];
+  helpers.decoded(token, config.secret, (verify)=>{
+    res.json({
+      valid : verify
+    })
+  })
 })
 
-router.post('destroy', (req, res) =>{
-
+router.get('/destroy', (req, res) =>{
+  res.json({
+    logout: true
+  })
 })
 
 module.exports = router;
