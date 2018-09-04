@@ -40,7 +40,7 @@ router.put('/:id', function(req, res) {
     res.json({
       success: true,
       message: "data has been updated",
-      maps: {
+      data: {
         _id: maps._id,
         title: maps.title,
         lat: maps.lat,
@@ -51,7 +51,7 @@ router.put('/:id', function(req, res) {
     res.json({
       success: false,
       message: "updating data has been failed",
-      maps: {
+      data: {
         _id: null,
         letter: null,
         frequency: null
@@ -71,7 +71,7 @@ router.post('/', (req, res) =>{
     res.json({
       success: true,
       message: "data has been added",
-      maps:{
+      data:{
         _id: maps1._id,
         title: maps1.title,
         lat: maps1.lat,
@@ -99,7 +99,7 @@ router.delete('/:id', function(req, res) {
     res.json({
       success: true,
       message: "data has been deleted",
-      maps:{
+      data:{
         _id: maps._id,
         title: maps.title,
         lat: maps.lat,
@@ -110,7 +110,7 @@ router.delete('/:id', function(req, res) {
     res.json({
       success: false,
       message: "daleting data has been failed",
-      maps:{
+      data:{
         _id: null,
         title: null,
         lat: null,
@@ -127,7 +127,7 @@ router.get('/:id', function(req, res){
     res.json({
       success: true,
       message: "data found",
-      maps:{
+      data:{
         _id: maps._id,
         title: maps.title,
         lat: maps.lat,
@@ -138,7 +138,7 @@ router.get('/:id', function(req, res){
     res.json({
       success: false,
       message: "data not found",
-      maps:{
+      data:{
         _id: null,
         letter: null,
         frequency: null
