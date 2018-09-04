@@ -53,7 +53,7 @@ router.put('/:id', function(req, res, next) {
       res.json({
         success: false,
         message: `updating datadate has been failed id : ${id} not found`,
-        datadate: {
+        data: {
           _id: null,
           letter: null,
           frequency: null
@@ -63,7 +63,7 @@ router.put('/:id', function(req, res, next) {
       res.json({
         success: true,
         message: "datadate has been updated",
-        datadate: {
+        data: {
           _id: datadate._id,
           letter: moment(datadate.letter).format("YYYY-MM-DD"),
           frequency: datadate.frequency
@@ -74,7 +74,7 @@ router.put('/:id', function(req, res, next) {
     res.json({
       success: false,
       message: "updating datadate has been failed",
-      datadate: {
+      data: {
         _id: null,
         letter: null,
         frequency: null
@@ -93,7 +93,7 @@ router.post('/', (req, res) =>{
     res.json({
       success: true,
       message: "datadate has been added",
-      datadate:{
+      data:{
         _id: datadate1._id,
         letter: moment(datadate1.letter).format("YYYY-MM-DD"),
         frequency: datadate1.frequency
@@ -103,7 +103,7 @@ router.post('/', (req, res) =>{
     res.json({
       success: false,
       message: "adding datadate has been failed",
-      datadate:{
+      data:{
         _id: null,
         letter: null,
         frequency: null
@@ -120,7 +120,7 @@ router.delete('/:id', function(req, res, next) {
       res.json({
         success: true,
         message: "datadate has been deleted",
-        datadate:{
+        data:{
           _id: datadate._id,
           letter: moment(datadate.letter).format("YYYY-MM-DD"),
           frequency: datadate.frequency
@@ -130,7 +130,7 @@ router.delete('/:id', function(req, res, next) {
       res.json({
         success: false,
         message: `daleting datadate has been failed id: ${id}`,
-        datadate:{
+        data:{
           _id: null,
           letter: null,
           frequency: null
@@ -141,7 +141,7 @@ router.delete('/:id', function(req, res, next) {
     res.json({
       success: false,
       message: "daleting datadate has been failed id: ",
-      datadate:{
+      data:{
         _id: null,
         letter: null,
         frequency: null
@@ -158,7 +158,7 @@ router.get('/:id', function(req, res, next){
       res.json({
         success: true,
         message: "datadate found",
-        datadate:{
+        data:{
           _id: datadate._id,
           letter: moment(datadate.letter).format("YYYY-MM-DD"),
           frequency: datadate.frequency
@@ -168,7 +168,7 @@ router.get('/:id', function(req, res, next){
       res.json({
         success: false,
         message: `datadate with id: ${id} not found`,
-        datadate:{
+        data:{
           _id: null,
           letter: null,
           frequency: null
@@ -179,7 +179,7 @@ router.get('/:id', function(req, res, next){
     res.json({
       success: false,
       message: "datadate not found",
-      datadate:{
+      data:{
         _id: null,
         letter: null,
         frequency: null
