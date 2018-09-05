@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-inverse">
+  <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -31,18 +31,51 @@
           <li><a href="http://localhost:3000/maps">Maps</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="http://localhost:3000/logout">Logout</a></li>
+          <li><a href="#" id="logout" onclick="logout()">Logout</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
-    </nav>
+  </nav>
 
-    <div class="container">
-      <div class="jumbotron">
-        <h2>Wellcome,</h2>
-        <h2>saefulrizky@gmail.com</h2>
-      </div>
+  <div class="container">
+    <div class="jumbotron">
+    </div>
   </div>
 
+  <script type="text/javascript">
+  let apiUrl = `http://localhost:3001/api/users`
+
+  function auth(token){
+    $.ajax({
+      url: apiUrl + '/check',
+      method: 'POST',
+      data:{
+        token: token
+      }
+    }).done(data => {
+      if(!data.valid){
+        window.location = '/login';
+      }
+    })
+  }
+
+  function drawHeader(email){
+    let html = `<h2>Wellcome,</h2> <h2>${email}</h2>`;
+    $('.jumbotron').html(html);
+  }
+
+  function logout(){
+    $('#logout').click(function(e){
+      e.preventDefault();
+      localStorage.clear();
+      window.location = '/login';
+    })
+  }
+
+  $(document).ready(function(){
+    auth(localStorage.getItem('token'));
+    drawHeader(localStorage.getItem('email'));
+  })
+</script>
 </body>
 </html>

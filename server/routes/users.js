@@ -6,25 +6,32 @@ const helpers = require('../helpers/util');
 
 
 router.post('/register', (req, res) =>{
-  let user = new User({
-    email: req.body.email,
-    password: req.body.password,
-    retypepassword: req.body.retypepassword
-  })
-  user.save().then(users => {
-    let token = helpers.token(users.email, users.password, config.secret, 86400)
-    res.json({
-      data:{
-        email: users.email
-      },
-      token: token
+  if(req.body.password == req.body.retypepassword){
+    let user = new User({
+      email: req.body.email,
+      password: req.body.password,
+      retypepassword: req.body.retypepassword
     })
-  }).catch(err => {
+    user.save().then(users => {
+      let token = helpers.token(users.email, users.password, config.secret, 86400)
+      res.json({
+        data:{
+          email: users.email
+        },
+        token: token
+      })
+    }).catch(err => {
+      res.json({
+        error: true,
+        message: err.message
+      })
+    })
+  }else{
     res.json({
       error: true,
-      message: err.message
+      message: 'password and retypepassword are not match'
     })
-  })
+  }
 })
 
 router.post('/login', (req, res) =>{
@@ -32,20 +39,10 @@ router.post('/login', (req, res) =>{
     email: req.body.email,
   }).then(user => {
     if(!user){
-      res.json({
-        data:{
-          email: "Invalid email"
-        },
-        token: "Login has failed"
-      })
+      res.json({error: true, message : "Email is invalid"})
     }else{
       if(req.body.password != user.password){
-        res.json({
-          data:{
-            email: "Password doesnt match"
-          },
-          token: "Login has failed"
-        })
+        res.json({error: true, message: "Password is invalid"})
       }else{
         let token = helpers.token(user.email, user.password, config.secret, 68400);
         res.json({
@@ -62,9 +59,12 @@ router.post('/login', (req, res) =>{
 router.post('/check', (req, res) =>{
   var token = req.body.token || req.query.token || req.header['x-access-token'];
   helpers.decoded(token, config.secret, (verify)=>{
-    res.json({
-      valid : verify
-    })
+    if(verify){
+      res.json({valid: true})
+    }else{
+      res.json({error: true, message: "Token is invalid"})
+    }
+
   })
 })
 
