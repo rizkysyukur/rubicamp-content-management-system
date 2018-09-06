@@ -62,7 +62,8 @@
     }
   }).done(data=>{
     if(data.token){
-      alert(`New account ${data.data.email} has been registered,\nNow please log in using this account.`);
+      alert(`New account ${data.data.
+        email} has been registered,\nNow please log in using this account.`);
       window.location = "/login";
     }else{
       alert(data.message);

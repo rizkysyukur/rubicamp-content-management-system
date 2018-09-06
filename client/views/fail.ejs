@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CMS</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+</head>
+<body>
+
+  <div class="container">
+    <h1>Pie Diagram of Data</h1>
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
+  </div>
+
+<script type="text/javascript">
+google.charts.load("current", {packages:["corechart"]});
+google.charts.setOnLoadCallback(drawChart);
+function drawChart() {
+  var data = google.visualization.arrayToDataTable([
+    ['Task', 'Hours per Day'],
+    ['Work',     11],
+    ['Eat',      2],
+    ['Commute',  2],
+    ['Watch TV', 2],
+    ['Sleep',    7]
+  ]);
+
+  var options = {
+    title: 'My Daily Activities',
+    is3D: true,
+  };
+
+  var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+  chart.draw(data, options);
+}
+
+
+  <!-- // let apiUrl = 'http://localhost:3001/api/data/';
+  // $(document).ready(function(){
+  //   google.charts.load('current', {'packages':['corechart']});
+  //   google.charts.setOnLoadCallback(drawChart);
+  // })
+
+  function drawChart() {
+  $.ajax({
+    url: apiUrl,
+    method: 'GET'
+  }).done(data => {
+    let listdata = [];
+    let itemchart = [];
+    data.forEach(item=>{
+      itemchart.push(item.letter);
+      itemchart.push(item.frequency);
+      listdata.push(itemchart);
+    })
+    let datachart = google.visualization.arrayToDataTable(listdata);
+    let option = {
+      title: 'Diagram of Data'
+      let chart = new google.visualization.PieChart(document.getElementById('piechart'));
+      chart.draw(datachart, options);
+    }
+  })
+  } -->
+</script>
+</body>
+</html>

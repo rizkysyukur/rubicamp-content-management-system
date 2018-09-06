@@ -15,6 +15,11 @@ router.post('/search', (req, res) =>{
 
   Data.find(keyword).then(data1 => {
     res.json(data1);
+  }).catch(err => {
+    res.json({
+      error: true,
+      message: err.message
+    })
   })
 })
 
@@ -22,6 +27,11 @@ router.post('/search', (req, res) =>{
 router.get('/', (req, res) =>{
   Data.find().then(data1 => {
     res.json(data1);
+  }).catch(err => {
+    json({
+      error: true,
+      message: `something went wrong : ${err.message}`
+    })
   })
 })
 
