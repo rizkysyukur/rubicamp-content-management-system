@@ -39,7 +39,7 @@ router.get('/data', function(req, res, next) {
 });
 
 router.get('/dataDate', function(req, res, next) {
-  res.render('home');
+  res.render('datadate');
 });
 
 router.get('/maps', function(req, res, next) {
