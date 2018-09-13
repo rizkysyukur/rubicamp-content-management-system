@@ -12,6 +12,9 @@ mongoose.connect('mongodb://localhost/cms',{
   process.exit();
 })
 
-let data = fs.readFileSync('data.json', 'utf8');
+let data = JSON.parse(fs.readFileSync(__dirname + '/data.json', 'utf8'));
 
-console.log(data);
+Datadate.insertMany(data, function (err, mongooseDocuments) {
+  if(err) throw err;
+  console.log('insert data success');
+});

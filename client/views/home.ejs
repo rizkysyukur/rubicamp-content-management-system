@@ -31,7 +31,7 @@
           <li><a href="http://localhost:3000/maps">Maps</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" id="logout" onclick="logout()">Logout</a></li>
+          <li><a href="#" id="logout">Logout</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -64,13 +64,11 @@
     $('.jumbotron').html(html);
   }
 
-  function logout(){
-    $('#logout').click(function(e){
-      e.preventDefault();
-      localStorage.clear();
-      window.location = '/login';
-    })
-  }
+  $('#logout').click(function(e){
+    e.preventDefault();
+    localStorage.clear();
+    window.location = '/login';
+  })
 
   $(document).ready(function(){
     auth(localStorage.getItem('token'));
