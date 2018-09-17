@@ -18,8 +18,8 @@ router.get('/bar', function(req, res, next) {
   res.render('bar');
 });
 
-router.get('/maps', function(req, res, next) {
-  res.render('maps');
+router.get('/mapsview', function(req, res, next) {
+  res.render('mapsview');
 });
 
 router.get('/login', function(req, res, next) {
@@ -43,7 +43,7 @@ router.get('/dataDate', function(req, res, next) {
 });
 
 router.get('/maps', function(req, res, next) {
-  res.render('home');
+  res.render('maps');
 });
 
 router.get('/logout', function(req, res, next) {
